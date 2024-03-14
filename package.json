@@ -1,0 +1,27 @@
+{
+  "name": "micro-rfid",
+  "version": "1.0.0",
+  "description": "Simple RFID server that allows one to identify itself through simple API calls",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "express-session": "^1.18.0",
+    "helmet": "^7.1.0",
+    "knex": "^3.1.0",
+    "morgan": "^1.10.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pug": "^3.0.2",
+    "sqlite3": "^5.1.7",
+    "winston": "^3.12.0"
+  }
+}
