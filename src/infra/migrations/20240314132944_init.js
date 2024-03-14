@@ -18,7 +18,7 @@ export async function up(knex) {
             t.string('email', 250).notNullable();
             t.string('password', 100).notNullable();
             t.string('card_id', 150).nullable();
-            t.string('permissions', 250).notNullable().defaultTo('common-door')
+            t.string('permissions', 250).notNullable().defaultTo('common-door');
             t.timestamps({ defaultToNow: true, useCamelCase: true });
 
             t.foreign('card_id', 'card_user_id')
