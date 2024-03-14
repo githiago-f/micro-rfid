@@ -4,6 +4,7 @@ import cors from 'cors';
 import url from 'node:url';
 import path from 'node:path';
 import helmet from 'helmet';
+import { createServer } from 'node:https';
 
 import './app/config/auth.js';
 
@@ -13,8 +14,9 @@ import { render } from './infra/utils/render.js';
 import users from './app/http/users/index.js';
 import projects from './app/http/projects/index.js';
 import authentication from './app/http/authentication/index.js';
+import { getKeyAndCert } from './infra/cert.js';
 
-const PORT = Number(process.env.PORT ?? '3000');
+const PORT = Number(process.env.PORT ?? '443');
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const app = express();
@@ -46,6 +48,12 @@ app.use(function(err, _, res, __) {
     logger.error(err);
 });
 
-app.listen(PORT, () => {
-    logger.info(`Application listening on port ${PORT}`);
-});
+async function bootstrap() {
+    const server = createServer(await getKeyAndCert(), app);
+    
+    server.listen(PORT, () => {
+        logger.info(`Application listening on port ${PORT}`);
+    });
+}
+
+bootstrap();
