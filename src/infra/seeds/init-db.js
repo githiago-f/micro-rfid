@@ -1,5 +1,5 @@
 import { PERMISSION_TABLE, USER_TABLE } from '../knex-connection.js';
-import { enc } from './../utils/encript.js';
+import { enc } from '../utils/encript.js';
 
 /**
  * @param { import("knex").Knex } knex
@@ -24,10 +24,10 @@ export async function seed(knex) {
         }
     ]);
     await knex(USER_TABLE).insert({
-        permissions: ['dashboard', 'door-full'],
+        permissions: ['dashboard', 'door-full'].toString(),
         name: 'admin',
         card_id: null,
         email: 'admin@admin.com',
-        password: enc('admin123')
+        password: await enc('admin123')
     });
 }

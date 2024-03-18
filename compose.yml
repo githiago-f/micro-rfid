@@ -1,5 +1,18 @@
-version: 3
+version: '3'
 
 services:
   database:
     image: mysql
+    ports:
+      - '3306:3306'
+    volumes:
+      - dbvol:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: micro-rfid
+      MYSQL_USER: microrfid_user
+      MYSQL_PASSWORD: pass123
+      MYSQL_ROOT_PASSWORD: rootpass123
+
+volumes:
+  dbvol:
+    driver: local

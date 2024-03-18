@@ -5,6 +5,9 @@ import url from 'node:url';
 import path from 'node:path';
 import helmet from 'helmet';
 import { createServer } from 'node:https';
+import { config } from 'dotenv';
+
+config();
 
 import './app/config/auth.js';
 

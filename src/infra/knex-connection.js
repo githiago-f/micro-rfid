@@ -1,9 +1,15 @@
 import knex from 'knex';
+import { config } from 'dotenv';
+import { join } from 'path';
+
+config({ path: join(process.cwd(), '../..', '.env'), debug: true });
 import { Logger } from '../app/config/logger.js';
 
 const logger = Logger('knex-db');
 
-const config = {
+logger.info(`Test::${process.env.DB_NAME}`);
+
+const connectionConfig = {
     debug: process.env.DB_DEBUG === 'true',
     client: 'mysql2',
     connection: {
@@ -24,10 +30,11 @@ const config = {
         warn: logger.warn.bind(logger),
         error: logger.error.bind(logger)
     }
-};
+}; 
 
-export default config;  
-export const db = knex(config);
+export default connectionConfig;  
+export const connection = knex(connectionConfig);
+
 export const USER_TABLE = 'users';
 export const PERMISSION_TABLE = 'permissions';
 export const PROJECTS_TABLE = 'projects';
