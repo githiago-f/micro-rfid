@@ -10,7 +10,7 @@ export async function up(knex) {
             t.bigIncrements('id')
                 .primary({ constraintName: 'card_pk' })
                 .unsigned();
-            t.string('rfid', 150);
+            t.string('rfid', 150).index('rfid_idx');
             t.timestamps({ defaultToNow: true, useCamelCase: false });
         });
 

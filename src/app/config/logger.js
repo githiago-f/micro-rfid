@@ -1,6 +1,6 @@
-import { createLogger, format, transports } from 'winston';
+import winston from 'winston';
 
-const { combine, timestamp, printf } = format;
+const { combine, timestamp, printf } = winston.format;
 
 const formatter = combine(
     timestamp(),
@@ -8,10 +8,10 @@ const formatter = combine(
 );
 
 export function Logger(service) {
-    return createLogger({
+    return winston.createLogger({
         format: formatter,
         defaultMeta: { service },
-        transports: [new transports.Console()],
+        transports: [new winston.transports.Console()],
         level: process.env.LOG_LEVEL ?? 'debug'
     });
 }

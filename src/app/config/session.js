@@ -1,8 +1,8 @@
 import passport from 'passport';
-import session from 'express-session';
+import expressSession from 'express-session';
 import { randomUUID } from 'node:crypto';
 
-export const sessionManager = session({
+export const sessionManager = expressSession({
     secret: process.env.SESSION_SECRET ?? randomUUID(),
     resave: false,
     saveUninitialized: false

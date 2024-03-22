@@ -17,9 +17,10 @@ import { render } from './infra/utils/render.js';
 import users from './app/http/users/index.js';
 import projects from './app/http/projects/index.js';
 import authentication from './app/http/authentication/index.js';
+import door from './app/http/door/index.js';
 import { getKeyAndCert } from './infra/cert.js';
 
-const PORT = Number(process.env.PORT ?? '443');
+const PORT = Number(process.env.PORT ?? '8443');
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const app = express();
@@ -40,6 +41,7 @@ app.get('/', render('index'));
 app.use('/auth', authentication);
 app.use('/users', session, users);
 app.use('/projects', session, projects);
+app.use('/doors', door);
 
 app.use(function(err, _, res, __) {
     // set locals, only providing error in development
