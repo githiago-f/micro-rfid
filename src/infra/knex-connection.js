@@ -3,9 +3,10 @@ import { config } from 'dotenv';
 import { join } from 'node:path';
 import url from 'node:url';
 
+import { Logger } from '../app/config/logger.js';
+
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 config({ path: join(__dirname, '../..', '.env'), debug: true });
-import { Logger } from '../app/config/logger.js';
 
 const logger = Logger('knex-db');
 

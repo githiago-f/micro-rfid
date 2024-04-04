@@ -27,6 +27,7 @@ export async function seed(knex) {
         permissions: ['dashboard', 'door-full'].toString(),
         name: 'admin',
         card_id: null,
+        default_password: true,
         email: 'admin@admin.com',
         password: await enc('admin123')
     });
