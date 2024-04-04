@@ -6,10 +6,12 @@ html(lang="en")
         title Login
     body 
         h2 Login no sistema
-        form(action="", method="post")
+        form(action="/auth", method="post")
             div
                 label(for="email") E-mail
                 input#email(type="email", name="email")
             div
                 label(for="password") Senha
                 input#password(type="password", name="password")
+            div
+                input(type="submit", value="Enviar")

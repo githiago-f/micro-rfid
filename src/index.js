@@ -18,6 +18,7 @@ import users from './app/http/users/index.js';
 import projects from './app/http/projects/index.js';
 import authentication from './app/http/authentication/index.js';
 import door from './app/http/door/index.js';
+import web from './app/http/web/index.js';
 import { getKeyAndCert } from './infra/cert.js';
 
 const PORT = Number(process.env.PORT ?? '8443');
@@ -41,6 +42,7 @@ app.get('/', render('index'));
 app.use('/auth', authentication);
 app.use('/users', session, users);
 app.use('/projects', session, projects);
+app.use('/dashboard', session, web);
 app.use('/doors', door);
 
 app.use(function(err, _, res, __) {

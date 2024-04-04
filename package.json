@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "DEBUG=knex:query npx nodemon --watch ./src -e js src/index.js",
+    "dev": "npx nodemon --watch ./src -e js src/index.js",
     "knex": "npx knex --knexfile src/infra/knex-connection.js",
     "migrate": "npm run knex migrate:latest",
     "seed": "npm run knex seed:run"

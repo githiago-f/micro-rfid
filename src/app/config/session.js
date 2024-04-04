@@ -8,4 +8,7 @@ export const sessionManager = expressSession({
     saveUninitialized: false
 });
 
+/**
+ * @type {import('express').RequestHandler}
+ */
 export const session = passport.authenticate('session');
