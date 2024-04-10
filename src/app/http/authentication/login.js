@@ -8,12 +8,9 @@ export function loginRouter(router) {
     router.post('/', passport.authenticate('local', {
         failureRedirect: '/',
         failureFlash: true
-    }), (req, res, next) => {
-        const { user, url } = req;
+    }), (req, res) => {
+        const { user } = req;
         if(user.isDefaultPassword) {
-            if(/auth\/password/gi.test(url)) {
-                return next();
-            }
             return res.redirect('/auth/password');
         }
         return res.redirect('/dashboard');

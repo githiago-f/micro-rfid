@@ -1,13 +1,13 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
-import { findUserByEmail, findUserById } from '../../domain/repositories/users.repository.js';
+import { findByEmail, findById } from '../../domain/repositories/users.repository.js';
 import { comp } from '../../infra/utils/encript.js';
 import { Logger } from './logger.js';
 
 const logger = Logger('auth');
 
 passport.use('local', new LocalStrategy({ usernameField: 'email' }, function (email, password, next) {
-    findUserByEmail(email)
+    findByEmail(email)
         .then(async user => {
             logger.info('User found');
             if(!user.canAccessDashboard) {
@@ -15,13 +15,13 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, function (em
                 throw new Error('User cannot use the dashboard, get in toutch with the system administrator');
             }
             const passwordMatch = await comp(password, user.password);
-            if(!passwordMatch) next(null, false);
-            logger.info('Password matched');
+            logger.info('Does passwords match? :: ' + passwordMatch);
+            if(!passwordMatch) return next(null, false);
             return next(null, user);
         })
         .catch(e => {
             logger.error(e);
-            next(e, false)
+            next(e, false);
         });
 }));
 
@@ -30,7 +30,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-    findUserById(id)
+    findById(id)
         .then(user => done(null, user))
         .catch(err => done(err, false));
 });
