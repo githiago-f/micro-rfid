@@ -5,6 +5,6 @@ block content
         h2 Login no sistema
         form(action="/auth", method="post")
             +input("email", null, "E-mail")
-            +input("password", null, "Senha")
+            +password("password", null, "Senha")
             div.mb-3
                 input.btn.btn-success(type="submit", value="Enviar")

@@ -1,1 +1,12 @@
 extends layout/default.pug
+include components/form-mixins.pug
+
+block content
+    include components/nav.pug
+    section.pt-5.w-75.mx-auto
+        form(action="/users", method="post") 
+            h2 Criar um projeto
+            +input("project_name", null, "Nome do projeto")
+            +date("project_due_date", "Data limite")
+            .mb-3
+                input.btn.btn-success(type="submit", value="Enviar")

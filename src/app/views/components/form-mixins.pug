@@ -1,4 +1,14 @@
 mixin input(name, value, holder)
-    div.mb-3
+    .mb-3
         label.form-label(for=name) #{holder}
         input.form-control(id=name, type="text", name=name, value=value, placeholder=holder)
+
+mixin password(name, value, holder)
+    .mb-3
+        label.form-label(for=name) #{holder}
+        input.form-control(id=name, type="password", name=name, value=value, placeholder=holder)
+
+mixin date(name, holder)
+    .mb-3 
+        label.form-label(for=name) #{holder}
+        input.form-control(id=name, type="date", name=name)
