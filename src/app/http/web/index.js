@@ -1,8 +1,19 @@
 import { Router } from 'express';
-import { render } from '../../../infra/utils/render.js';
+import { findLastDenied } from '../../../domain/repositories/requests.repository.js';
 
 const router = Router();
 
-router.get('/', render('projects'));
+router.get('/', async (req, res) => {
+    const notifications = await findLastDenied();
+
+    res.render('dashboard', {
+        title: 'Dashboard',
+        projects: [],
+        users: [],
+        notifications
+    });
+});
+
+
 
 export default router;

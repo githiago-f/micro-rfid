@@ -3,7 +3,9 @@ import expressSession from 'express-session';
 import { randomUUID } from 'node:crypto';
 
 export const sessionManager = expressSession({
-    secret: process.env.SESSION_SECRET ?? randomUUID(),
+    secret: (process.env.SESSION_SECRET?.trim() === '') ? 
+        randomUUID() : 
+        process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 });

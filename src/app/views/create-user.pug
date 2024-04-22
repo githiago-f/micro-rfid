@@ -1,0 +1,13 @@
+extends layout/default.pug
+include components/form-mixins.pug
+block content
+    include components/nav.pug
+    section.pt-5.w-75.mx-auto
+        form(action="/users", method="post") 
+            h3 Dados do cartão
+            +input("card_rfid", rfid, "RFID")
+            h3 Dados do usuário
+            +input("name", null, "Nome do usuário")
+            +input("email", null, "E-mail do usuário")
+            .mb-3
+                input.btn.btn-success(type="submit", value="Enviar")

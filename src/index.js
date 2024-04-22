@@ -18,6 +18,7 @@ import users from './app/http/users/index.js';
 import projects from './app/http/projects/index.js';
 import authentication from './app/http/authentication/index.js';
 import door from './app/http/door/index.js';
+import notification from './app/http/notification/index.js';
 import web from './app/http/web/index.js';
 import { getKeyAndCert } from './infra/cert.js';
 
@@ -31,19 +32,21 @@ const logger = Logger('micro-rfid');
 app.use(morgan('common'));
 app.use(cors());
 app.use(helmet());
+app.use(express.static(path.join(__dirname, '../public')));
 app.set('views', path.join(__dirname, 'app/views'));
 app.set('view engine', 'pug');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(sessionManager);
 
-app.get('/', render('index'));
+app.get('/', render('index', { title: 'Login' }));
 
 app.use('/auth', authentication);
 app.use('/users', session, users);
 app.use('/projects', session, projects);
 app.use('/dashboard', session, web);
 app.use('/doors', door);
+app.use('/notifications', session, notification);
 
 app.use(function(err, _, res, __) {
     // set locals, only providing error in development
@@ -51,7 +54,7 @@ app.use(function(err, _, res, __) {
     res.locals.error = err;
   
     // render the error page
-    res.status(err.status || 500);
+    res.status(err.status || 500).write(err.msg ?? err.message ?? '500 Internal server error');
     logger.error(err);
 });
 

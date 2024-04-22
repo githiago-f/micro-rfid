@@ -1,0 +1,17 @@
+extends layout/default.pug
+mixin notification(id, acceptLink)
+    .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-4.col-xxl-3.mb-1.pl-1
+        .card
+            .card-body
+                h5.card-title Tentativa de acesso
+                h6.card-subtitle.mb-2.text-body-secondary= '[notification]'
+                a.card-link.btn.btn-success(href=acceptLink) Cadastrar cartão
+                a.card-link.btn.btn-danger(href="/notifications/" + id + "/view") Negar
+
+block content
+    include components/nav.pug
+    section.pt-5.w-75.mx-auto
+        h2 Tentativas de acesso negadas
+        div.row
+            each notif in notifications
+                +notification(notif.id, '/users?rfid=' + notif.rfid)

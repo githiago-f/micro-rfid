@@ -1,4 +1,10 @@
-import { CARDS_TABLE, PERMISSION_TABLE, PROJECTS_TABLE, PROJECT_PERMISSION_TABLE, USER_TABLE } from './../knex-connection.js';
+import { 
+    CARDS_TABLE, 
+    PERMISSION_TABLE, 
+    PROJECTS_TABLE, 
+    PROJECT_PERMISSION_TABLE, 
+    USER_TABLE 
+} from './../knex-connection.js';
 
 /**
  * @param { import("knex").Knex } knex

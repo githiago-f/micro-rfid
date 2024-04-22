@@ -1,17 +1,10 @@
-doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Login
-    body 
+extends layout/default.pug
+include components/form-mixins.pug
+block content
+    section.pt-5.w-25.mx-auto
         h2 Login no sistema
         form(action="/auth", method="post")
-            div
-                label(for="email") E-mail
-                input#email(type="email", name="email")
-            div
-                label(for="password") Senha
-                input#password(type="password", name="password")
-            div
-                input(type="submit", value="Enviar")
+            +input("email", null, "E-mail")
+            +input("password", null, "Senha")
+            div.mb-3
+                input.btn.btn-success(type="submit", value="Enviar")

@@ -1,0 +1,4 @@
+mixin input(name, value, holder)
+    div.mb-3
+        label.form-label(for=name) #{holder}
+        input.form-control(id=name, type="text", name=name, value=value, placeholder=holder)

@@ -10,7 +10,7 @@ const logger = Logger('reset-password');
  * @param {import('express').Router} router 
  */
 export function resetPassword(router) {
-    router.get('/password', session, render('password-reset'));
+    router.get('/password', session, render('password-reset', { title: 'Alterar senha' }));
 
     router.post('/password', session, async (req, res) => {
         const user = req.user;

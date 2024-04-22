@@ -43,3 +43,4 @@ export const PERMISSION_TABLE = 'permissions';
 export const PROJECTS_TABLE = 'projects';
 export const CARDS_TABLE = 'cards';
 export const PROJECT_PERMISSION_TABLE = 'project_permissions';
+export const REQUESTS = 'request_log'
