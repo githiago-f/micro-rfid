@@ -3,6 +3,10 @@ import { render } from '../../../infra/utils/render.js';
 
 const router = Router();
 
-router.get('/', render('create-project', { title: 'Novo projeto'}));
+router.get('/', (req, res) => {
+    
+});
+
+
 
 export default router;

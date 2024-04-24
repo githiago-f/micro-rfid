@@ -12,3 +12,14 @@ mixin date(name, holder)
     .mb-3 
         label.form-label(for=name) #{holder}
         input.form-control(id=name, type="date", name=name)
+
+mixin hiddenInput(name, value)
+    input(id=name, name=name, type="text", value=value, hidden=true)
+
+mixin select(name, values, holder)
+    .mb-3
+        label.form-label(for=name)=holder
+        select.form-control(id=name, name=name)
+            option(value=null)=holder
+            each val in values
+                option(value=val.id) val.name

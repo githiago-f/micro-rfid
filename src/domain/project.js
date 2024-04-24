@@ -2,6 +2,9 @@ export class Project {
     constructor(raw) {
         this.id = raw.project_id;
         this.name = raw.project_name;
+        if(raw.project_due_date) {
+            this.dueDate = raw.project_due_date;
+        }
     }
 
     /**
@@ -9,9 +12,13 @@ export class Project {
      */
     set dueDate(dueDate) {
         if(typeof dueDate === 'string') {
-            this.dueDate = new Date(dueDate);
+            this._dueDate = new Date(dueDate);
         } else {
-            this.dueDate = dueDate;
+            this._dueDate = dueDate;
         }
+    }
+
+    get dueDate() {
+        return this._dueDate;
     }
 }

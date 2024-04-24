@@ -5,9 +5,10 @@ block content
     section.pt-5.w-75.mx-auto
         form(action="/users", method="post") 
             h3 Dados do cartão
+            +hiddenInput("notification_id", notification_id)
             +input("card_rfid", rfid, "RFID")
             h3 Dados do usuário
             +input("name", null, "Nome do usuário")
             +input("email", null, "E-mail do usuário")
-            .mb-3
-                input.btn.btn-success(type="submit", value="Enviar")
+            +select("project", projects, "Selecionar um projeto")
+            input.btn.btn-success(type="submit", value="Enviar")

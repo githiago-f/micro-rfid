@@ -11,6 +11,7 @@ import {
 import { Logger } from "../../app/config/logger.js";
 import { enc } from "../../infra/utils/encript.js";
 import { Project } from "../project.js";
+import { markAsViewed } from "./requests.repository.js";
 
 const users = () => connection({ usr: USER_TABLE });
 const usersWithRelations = () => users()
@@ -43,6 +44,29 @@ function makeUserWithProjects(raw) {
         user.setCard(new Card(lastRow));
     }
     return user;
+}
+
+/**
+ * 
+ * @param {User} user 
+ * @param {Number} requestId
+ */
+export async function create(user, requestId) {
+    if(user.card) {
+        user.card.id = await connection(CARDS_TABLE).insert({
+            rfid: user.card.rfid
+        }, 'id');
+    }
+    const userId = await connection(USER_TABLE).insert({
+        permissions: user.permissions.toString(),
+        name: user.name,
+        card_id: user.card?.id ?? undefined,
+        default_password: true,
+        email: user.email,
+        password: await enc(process.env.DEFAULT_PASSWORD ?? 'pass123')
+    }, 'id');
+    await markAsViewed(requestId);
+    return userId;
 }
 
 /**
