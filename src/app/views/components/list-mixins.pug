@@ -1,0 +1,16 @@
+mixin notification(id, rfid)
+    .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-4.col-xxl-3.mb-1.pl-1
+        .card
+            .card-body
+                h5.card-title Tentativa de acesso
+                h6.card-subtitle.mb-2.text-body-secondary= '[notification]'
+                a.card-link.btn.btn-success(href='/users?rfid=' + rfid + '&notification_id=' + id) Cadastrar cartão
+                a.card-link.btn.btn-danger(href="/notifications/" + id + "/view") Negar
+
+mixin userItem(user)
+    .col-12.col-sm-12.col-md-6.col-lg-6.col-xl-4.col-xxl-3.mb-1.pl-1
+        .card
+            .card-body
+                h5.card-title=user.name
+                h6.card-subtitle.mb-2.text-body-secondary= '[user]'
+                a.card-link.btn.btn-info(href='/users/' + user.id) Editar

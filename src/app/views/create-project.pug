@@ -1,8 +1,9 @@
 extends layout/default.pug
+include components/nav.pug
 include components/form-mixins.pug
 
 block content
-    include components/nav.pug
+    +navbar()
     section.pt-5.w-75.mx-auto
         form(action="/users", method="post") 
             h2 Criar um projeto

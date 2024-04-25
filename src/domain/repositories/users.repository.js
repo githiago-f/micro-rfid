@@ -32,7 +32,7 @@ const logger = Logger('users-repository');
  * @param {any[]} raw
  * @returns {User}
  */
-function makeUserWithProjects(raw) {
+function makeUsersWithProjects(raw) {
     logger.info(`User with projects :: ${JSON.stringify(raw)}`);
     const lastRow = raw.at(-1);
     const user = new User(lastRow);
@@ -44,6 +44,21 @@ function makeUserWithProjects(raw) {
         user.setCard(new Card(lastRow));
     }
     return user;
+}
+
+/**
+ * @param {any[]} raw
+ * @returns {User}
+ */
+function makeUsersWithRelations(raw) {
+    logger.info(`User with projects :: ${JSON.stringify(raw)}`);
+    const groups = {};
+    for (const row of raw) {
+        groups[row.id] = groups[row.id] || [];
+        groups[row.id].push(row);
+    }
+
+    return iterate(Object.keys(groups)).map(i => makeUsersWithProjects(groups[i])).toArray();
 }
 
 /**
@@ -82,7 +97,7 @@ export async function findByCardCode(cardCode) {
     if(rows.length < 1) {
         return undefined;
     }
-    return makeUserWithProjects(rows);
+    return makeUsersWithProjects(rows);
 };
 
 /**
@@ -94,7 +109,7 @@ export async function findByEmail(email) {
     if(rows.length < 1) {
         return undefined;
     }
-    return makeUserWithProjects(rows);
+    return makeUsersWithProjects(rows);
 };
 
 /**
@@ -106,7 +121,16 @@ export async function findById(id) {
     if(rows.length < 1) {
         return undefined;
     }
-    return makeUserWithProjects(rows);
+    return makeUsersWithProjects(rows);
+}
+
+export async function findAllPaged(page = 0, size = 25, sortBy = 'name', order = 'desc') {
+    const raw = await usersWithRelations().limit(size).offset(page * size).orderBy(sortBy, order);
+    if(raw.length < 1) {
+        return [];
+    }
+    console.log(raw);
+    return makeUsersWithRelations(raw);
 }
 
 /**
