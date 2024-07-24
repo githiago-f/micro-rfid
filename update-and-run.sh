@@ -2,7 +2,7 @@ cd /home/micro-rfid/micro-rfid;
 
 # verify if git exists first
 if command -v git &> /dev/null; then
-  git pull origin master;
+  git pull origin main;
 fi
 
 ADDR=`ifconfig enp0s3 | grep -Eom1 'inet ([0-9]{1,3}\.){3}[0-9]{1,3}' | cut -d " " -f2`;
