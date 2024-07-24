@@ -35,10 +35,9 @@ fi
 
 npm install
 npm run migrate
-npm run seed
 
 LOG_PATH=./.logs/$(date +"%Y/%m/%d")
 
 mkdir -p $LOG_PATH
 
-npm start > $LOG_PATH/log.txt &
+npm start &> $LOG_PATH/log.txt
