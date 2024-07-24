@@ -22,7 +22,7 @@ import notification from './app/http/notification/index.js';
 import web from './app/http/web/index.js';
 import { getKeyAndCert } from './infra/cert.js';
 
-const PORT = Number(process.env.PORT ?? '8443');
+const PORT = Number(process.env.PORT ?? '8445');
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const app = express();
