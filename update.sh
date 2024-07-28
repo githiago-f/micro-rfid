@@ -52,7 +52,3 @@ fi
 
 npm install
 npm run migrate
-
-LOG_PATH=./.logs/$(date +"%Y/%m/%d")
-
-mkdir -p $LOG_PATH
