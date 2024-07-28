@@ -1,3 +1,4 @@
+CDR=$(pwd)
 cd /home/osboxes/micro-rfid;
 
 # verify if git exists first
@@ -52,3 +53,5 @@ fi
 
 npm install
 npm run migrate
+
+cd $CDR;
