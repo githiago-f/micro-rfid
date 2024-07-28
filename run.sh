@@ -1,7 +1,7 @@
 MRFID_PORT=443
 export MRFID_PORT=$MRFID_PORT
 
-fuser -k $MRFID_PORT/tcp
+sudo fuser -k $MRFID_PORT/tcp
 
 LOG_PATH=./.logs/$(date +"%Y/%m/%d")
 
