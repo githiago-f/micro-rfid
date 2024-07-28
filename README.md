@@ -1,8 +1,22 @@
 # micro-rfid
 Simple RFID server that allows one to identify itself through simple API calls
 
-### Config
+## Running
 
+> Before running, make sure you have the following required services running:
+> 
+> - MySQL
+>
+
+
+To update the project you can execute the manual `update` script:
 ```bash
-openssl req -newkey rsa:2048 -nodes -keyout ./.ssl/key.pem -x509 -days 365 -out ./.ssl/certificate.pem
+./update.sh
 ```
+
+And then, to execute the service manually, you should run the `run` script:
+```bash
+./run.sh
+```
+
+The `run` script will be executed by default at system boot.
