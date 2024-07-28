@@ -22,4 +22,4 @@ mixin select(name, values, holder)
         select.form-control(id=name, name=name)
             option(value=null)=holder
             each val in values
-                option(value=val.id) val.name
+                option(value=val.id)=val.name

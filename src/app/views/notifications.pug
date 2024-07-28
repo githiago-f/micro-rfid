@@ -1,0 +1,11 @@
+extends layout/default.pug
+include components/nav.pug
+include components/list-mixins.pug
+
+block content
+    +navbar()
+    section.pt-5.w-75.mx-auto
+        h2 Tentativas de acesso negadas
+            div.row
+                each notif in notifications
+                    +notification(notif.id, notif.rfid)

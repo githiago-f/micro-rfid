@@ -5,16 +5,18 @@ import url from 'node:url';
 
 import { Logger } from '../app/config/logger.js';
 
+const client = process.env.DB_CLIENT ?? 'mysql2';
+
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 config({ path: join(__dirname, '../..', '.env'), debug: true });
 
 const logger = Logger('knex-db');
 
-logger.info(`Test::${process.env.DB_NAME}`);
+logger.info(`Initialize connection to ${client}::${process.env.DB_NAME}`);
 
 const connectionConfig = {
     debug: process.env.DB_DEBUG === 'true',
-    client: 'mysql2',
+    client: client,
     connection: {
         host: process.env.DB_HOST ?? 'localhost',
         database: process.env.DB_NAME ?? 'micro-rfid',

@@ -5,9 +5,8 @@ include components/form-mixins.pug
 block content
     +navbar()
     section.pt-5.w-75.mx-auto
-        form(action="/users", method="post") 
+        form(action="/projects" + (callback ? `?callback=${callback}` : ''), method="post") 
             h2 Criar um projeto
             +input("project_name", null, "Nome do projeto")
-            +date("project_due_date", "Data limite")
             .mb-3
                 input.btn.btn-success(type="submit", value="Enviar")

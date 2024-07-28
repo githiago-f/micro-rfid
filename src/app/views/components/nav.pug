@@ -4,4 +4,7 @@ mixin navbar()
             a.navbar-brand(href="/dashboard")
                 img(src="/icon.svg", style="max-width:32px") 
                 | μ-RFID
-            a(href="/auth/logout") Logout
+            div
+                a.btn.btn-info(href="/notifications")=`Notificações ${notificationCount}`
+                span &nbsp;
+                a.btn.btn-dark(href="/auth/logout") Logout

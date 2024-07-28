@@ -1,3 +1,9 @@
+import { count } from "../../domain/repositories/requests.repository.js";
+
 export function render(page, options) {
-    return (req, res) => res.render(page, {...options, ...req.query});
+    return async (req, res) => res.render(page, {
+        ...options, 
+        notificationCount: await count(), 
+        ...req.query
+    });
 }

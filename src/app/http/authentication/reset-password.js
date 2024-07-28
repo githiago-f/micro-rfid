@@ -4,7 +4,7 @@ import { comp } from '../../../infra/utils/encript.js';
 import { updateById } from '../../../domain/repositories/users.repository.js';
 import { Logger } from "../../config/logger.js";
 
-const logger = Logger('reset-password');
+const logger = Logger('reset-password-controller');
 
 /**
  * @param {import('express').Router} router 

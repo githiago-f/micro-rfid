@@ -1,0 +1,12 @@
+extends layout/default.pug
+include components/nav.pug
+include components/form-mixins.pug
+
+block content
+    +navbar()
+    section.pt-5.w-75.mx-auto
+        form(action="/projects/" + project.id, method="post") 
+            h2 Criar um projeto
+            +input("project_name", project.name, "Nome do projeto")
+            .mb-3
+                input.btn.btn-success(type="submit", value="Salvar")

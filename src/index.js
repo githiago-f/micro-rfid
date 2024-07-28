@@ -29,7 +29,7 @@ const app = express();
 const logger = Logger('micro-rfid');
 
 // # CONFIG
-app.use(morgan('common'));
+app.use(morgan('common', { stream: logger.stream }));
 app.use(cors());
 app.use(helmet());
 app.use(express.static(path.join(__dirname, '../public')));

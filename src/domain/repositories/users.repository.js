@@ -33,10 +33,10 @@ const logger = Logger('users-repository');
  * @returns {User}
  */
 function makeUsersWithProjects(raw) {
-    logger.info(`User with projects :: ${JSON.stringify(raw)}`);
     const lastRow = raw.at(-1);
     const user = new User(lastRow);
-    const projects = iterate(raw).filter(r => r.project_id !== undefined)
+    const projects = iterate(raw)
+        .filter(r => r.project_id)
         .map(r => new Project(r))
         .toArray();
     user.setProjects(projects);
@@ -51,14 +51,15 @@ function makeUsersWithProjects(raw) {
  * @returns {User}
  */
 function makeUsersWithRelations(raw) {
-    logger.info(`User with projects :: ${JSON.stringify(raw)}`);
     const groups = {};
     for (const row of raw) {
         groups[row.id] = groups[row.id] || [];
         groups[row.id].push(row);
     }
 
-    return iterate(Object.keys(groups)).map(i => makeUsersWithProjects(groups[i])).toArray();
+    return iterate(Object.keys(groups))
+        .map(i => makeUsersWithProjects(groups[i]))
+        .toArray();
 }
 
 /**
@@ -125,11 +126,13 @@ export async function findById(id) {
 }
 
 export async function findAllPaged(page = 0, size = 25, sortBy = 'name', order = 'desc') {
-    const raw = await usersWithRelations().limit(size).offset(page * size).orderBy(sortBy, order);
+    const offset = page * size;
+    const raw = await usersWithRelations().limit(size)
+        .offset(isNaN(offset) ? 0 : offset)
+        .orderBy(sortBy, order);
     if(raw.length < 1) {
         return [];
     }
-    console.log(raw);
     return makeUsersWithRelations(raw);
 }
 
@@ -141,12 +144,20 @@ export async function findAllPaged(page = 0, size = 25, sortBy = 'name', order =
 export async function updateById(id, newData) {
     const password = (newData.password === undefined) ? 
         undefined : (await enc(newData.password));
+    const permissions = newData.permissions ? 
+        newData.permissions.toString() : undefined;
+
+    if(newData.card) {
+        
+    }
+
+
     await users().where('id', id).update({
-        permissions: newData.permissions.toString(),
         name: newData.name,
         card_id: newData.card?.id ?? undefined,
         default_password: false,
         email: newData.email,
+        permissions,
         password
     });
 

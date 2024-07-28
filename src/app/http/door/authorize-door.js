@@ -9,6 +9,9 @@ export function authorizeDoor(router) {
     router.get('/authorization', async (req, res) => {
         const { code } = req.query;
         logger.info(`Verifying user with card code :: ${code}`);
+        if(!code || code.trim() === '') {
+            return res.status(400).end('Invalid code');
+        }
 
         const allowed = await allowByCode(code);
         return res.status(200).end(allowed);

@@ -5,14 +5,10 @@ include components/list-mixins.pug
 block content
     +navbar()
     section.pt-5.w-75.mx-auto
-        h2 Tentativas de acesso negadas
-        div.row
-            each notif in notifications
-                +notification(notif.id, notif.rfid)
         h2 Projetos
         .row
             each prj in projects
-                h2=prj.name
+                +projectItem(prj)
         h2 Usuários
         .row
             each user in users 

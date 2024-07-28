@@ -1,0 +1,14 @@
+extends layout/default.pug
+include components/nav.pug
+include components/form-mixins.pug
+
+block content
+    +navbar()
+    section.pt-5.w-75.mx-auto
+        form(action="", method="post") 
+            h2 Selecionar um projeto
+            +select("project_id", projects, "Projeto")
+            a(href=`/projects?callback=${callback}`) + Projeto 
+            +date("project_due_date", "Data limite")
+            .mb-3
+                input.btn.btn-success(type="submit", value="Salvar")
